@@ -1,0 +1,425 @@
+\documentclass[presentation,t,aspectratio=169]{beamer}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage[font={scriptsize,it}]{caption}
+\usepackage{hyperref}
+\usepackage[T1]{fontenc}
+\sisetup{prespace}
+\usetheme{Antibes}
+\setbeamertemplate{itemize items}[default]
+\setbeamertemplate{enumerate items}[default]
+
+\usepackage{stackengine}
+\newcommand{\figcite}[3]{
+  \def\stackalignment{c}
+  \stackunder{\includegraphics[width=#1]{#2}}{\tiny Source: \url{#3}}
+}
+\newcommand{\btVFill}{\vskip0pt plus 1filll}
+
+
+% \logo{\includegraphics[height=0.5cm]{logo.png}} 
+\newcommand{\inlineMovie}[5][autostart&loop]
+{
+    \href{run:#2?#1}{\figcite{#4}{#3}{#5}}
+}
+
+\setbeamertemplate{footline}[frame number]
+
+
+\AtBeginSection[]
+{
+   \begin{frame}
+       \tableofcontents[currentsection]
+   \end{frame}
+}
+
+
+\title{Detection of Exoplanets}
+\subtitle{Part 1 - Exoplanet Overview}
+\author{Valentin Boettcher}
+\beamertemplatenavigationsymbolsempty
+
+\begin{document}
+\begin{frame}
+  \titlepage
+\end{frame}
+
+{  
+  \usebackgroundtemplate{
+  \includegraphics[width=\paperwidth]{material/peg_b.jpg}}
+  \begin{frame}[plain]
+  \end{frame}
+}
+
+\begin{frame}
+  \frametitle{Outline}
+  \tableofcontents[pausesections]
+\end{frame}
+
+\section{The definition of an Exoplanet}
+\begin{frame}
+  \frametitle{What is an Exoplanet?}
+  \begin{block}{Origins of the Term}
+    Exoplanet / Extrasolar planet from Greek 'Exo' (Latinized)
+    - ``Outside''.
+  \end{block}
+  \pause
+  \begin{definition}
+    There is none!
+  \end{definition}
+  \begin{block}{Some distinction from Stars}
+    \begin{itemize}
+    \item Fusion: does not fuse hydrogen (or any other element)
+      \\ $\implies$ Mass: moderately massive
+    \item Position: in orbit around a star
+    \item Formation: formed from accretion disk around a star
+    \end{itemize}    
+  \end{block}
+\end{frame}
+  \begin{frame}
+    \frametitle{A Working-Defintion}
+    \begin{block}{IAU 2003 Recommendation}
+      Planets $=$ Objects below 13 Jupiter masses.
+    \end{block}
+    \pause
+    Another Proposal based on the solar system definition by Jean-Luc Margot:
+    \begin{itemize}
+    \item based on metric for the clearing of the orbit
+      \begin{itemize}
+      \item based on mass of start and planet, orbital period
+      \end{itemize}
+    \item classifies 99\% of the known planets
+    \end{itemize}
+  \end{frame}
+
+\section{Nomenclature and Units}
+\begin{frame}
+  \begin{block}{Nomenclature}    
+     Name/Designation of Star +  a Letter ('b', 'c', ...)
+   \end{block}
+   \pause
+  \begin{example}
+    51 Pegasi b - first confirmed exoplanet around a normal star
+  \end{example}
+  \pause
+  \begin{block}{Units}
+    \begin{itemize}
+    \item Degrees ($1\degree$), Arcminutes ($1\arcmin$), Arcsecond ($1\arcsec$) - Measure for seperation on an imaginary sphere
+      \begin{itemize}
+      \item $\SI{1}{\arcmin}= \frac{1}{60} \degree$,  $\SI{1}{\arcsec}= \frac{1}{60} \arcmin$
+      \end{itemize}
+    \item $\mathrm{AU}$ Astronomical Unit - mean distance Earth-Sun $= \SI{149597870700}{\km}$
+    \item $\lightyear$ Lightyear - distance light travels in a year $= \SI{9.4607e15}{\meter}$
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+% \subsection{Some Orbital Parameters}
+% \begin{frame}
+%   \frametitle{Some Orbital Parameters}
+%   \begin{columns}[t]
+%     \column{.7\textwidth}
+%       \begin{itemize}
+%       \item<1-> Period $P\;[\mathrm{days}]$
+%       \item<2-> Semi Major Axis $a\;[\mathrm{au}]$
+%       \item<3-> Eccentricity $\epsilon$
+%       % \item<4->inclination $i\;[\degree]$ in respect to the reference plane
+%       \end{itemize}
+%     \column{.3\textwidth}
+%     \begin{block}{}<2->
+%       \includegraphics[width=\textwidth]{material/el.png}
+%     \end{block}
+%   %   \begin{block}{}<4->
+%   %     \includegraphics[width=\textwidth]{material/inc.png}
+%   %   \end{block}
+%  \end{columns}
+% \end{frame}
+
+\section{Challenges in Exoplanet Detection}
+\begin{frame}
+  The problem with planets:
+  \begin{itemize}
+  \item usually small compared to star
+    \pause
+  \item close to the star
+  \end{itemize}
+  \pause
+  \begin{example}
+    Looking at the Solar System and 51 Pegasi ($d=\SI{50.9}{\lightyear}$):
+    \begin{itemize}
+    % \item Angular Separation of Eath: $\SI{0.06}{\arcsec}$
+    \item Angular Separation of 51 Pegasi b as seen from Earth: $\SI{0.003}{\arcsec}$
+    \end{itemize}
+    \pause
+    Out of league for most Telescopes.
+  \end{example}
+  \pause
+  \begin{itemize}
+  \item not lumnius themselves (in the visible band) \\
+    $\implies$ \alert{very (very!) faint}
+  \end{itemize}
+  \pause
+  $\longrightarrow$ only about 20 directly imaged planets
+\end{frame}
+
+\subsection{Direct Imaging}
+\begin{frame}
+  \frametitle{Direct Imaging}
+  \pause
+  \begin{enumerate}
+  \item masking the star \pause
+  \item taking a lot of images (in infrared) \pause
+  \item stacking, interferometry and clever computer processing \pause
+  \end{enumerate}
+
+  \end{frame}
+  % \begin{frame}
+  %   \frametitle{Least Massive: Formalhaut b (2 Jup. Masses)}
+  %     \begin{figure}
+  %       \centering
+  %             \includegraphics[width=0.8\textwidth]{material/formb.jpg}
+  %     \caption{http://spacetelescope.org/images/html/heic0821a.html}
+  %     \end{figure}
+  % \end{frame}
+    \begin{frame}
+    \frametitle{Coldest: Gliese 504 b ($\SI{240}{\celsius}$)}
+      \begin{figure}
+        \centering
+        \figcite{0.45\textwidth}{material/glies.jpg}{http://www.nasa.gov/content/goddard/astronomers-image-lowest-mass-exoplanet-around-a-sun-like-star/index.html}
+      \end{figure}
+  \end{frame}
+    \begin{frame}
+    \frametitle{HR 8799 has 4 Planets}
+      \begin{figure}
+        \centering
+        \inlineMovie{material/keck_exo.avi}{material/keck_ex_p.png}{.75\textheight}{https://www.manyworlds.space/index.php/tag/hr-8799/}
+      \end{figure}
+  \end{frame}
+
+\section{Historic Overview}
+% \subsection{Antique}
+% \begin{frame}
+%   \frametitle{Antique}
+%   \begin{itemize}
+%   \item universe as a nebula \pause $\implies$ matter cant stay evenly
+%     distributed forever
+%   \end{itemize}
+
+%   \pause
+%   \begin{quote}
+%     ``Many bodies of all sorts and shapes move from the infinite into a
+%     great void; they come together there and produce a single whirl,
+%     in which, colliding with one another and revolving in all manner
+%     of ways, they begin to separate like to like.'' \hfill - \tiny{\textit{LEUCIPPUS, 480-420 B.C.}}
+%   \end{quote}
+% \pause
+%   \begin{quote}
+%     ``There \alert{cannot be more worlds} than one world.'' \\ \hfill - \tiny{\textit{ARSITOTLE, 384–322 B.C.}}
+%   \end{quote}
+% \end{frame}
+
+\begin{frame}
+  \begin{columns}[t]
+    \column{0.7\textwidth}
+  \begin{itemize}
+  \item<1-> \small{\textit{KOPERNIKUS}} (1543) of course supported plurality
+  \item<2-> \small{\textit{GIORDANO BRUNO}} (1548-1600) postulates spacial infinity
+  \item<3-> \small{\textit{NEWTON}} (1548-1600) speculates about other solar systems
+  \item<4-> \small{\textit{OTTO STRUVE}} (1952) proposes methods of exoplanet detection
+  \end{itemize}
+  \only<5>{$\longrightarrow$ In the following years: A lot of false-positives.}
+  \column{0.3\textwidth}
+  \only<1>{\figcite{\textwidth}{material/kop.jpg}{Icones, p. 36}}
+  \only<2>{\figcite{\textwidth}{material/brun.jpg}{Neue Bibliothec}}
+   \only<3>{\figcite{\textwidth}{material/newt.jpg}{National Portrait Gallery: NPG 2881}}
+  \only<4->{\figcite{\textwidth}{material/struve.jpg}{US Post}}
+\end{columns}
+\end{frame}
+
+\subsection{First Planets}
+\begin{frame}
+  \frametitle{First Planets}
+  \begin{columns}
+    \column{0.5\textwidth}
+    \begin{itemize}
+    \item<1-> 1992 - first radio pulsar timing planet
+    \end{itemize}
+    \action<2->{
+    \begin{block}{1995 - First planet around 'real' star}
+      \begin{itemize}
+      \item discovered by Mayor, Queloz of University Geneva
+      \item 4 day orbit, much closer than Mercury (Hot Jupiter), 1.9 Jupiter radii 
+      \end{itemize}
+    \end{block}}
+  \only<1>{\column{0.5\textwidth}\figcite{\textwidth}{material/puls.jpg}{https://photojournal.jpl.nasa.gov/catalog/PIA08042}}
+      \only<2>{\column{0.5\textwidth}\figcite{\textwidth}{material/peg_b.jpg}{https://www.eso.org/public/russia/images/eso1517a/}}
+  \end{columns}
+\end{frame}
+
+\subsection{State-of-the-Art}
+\begin{frame}
+  \frametitle{Today's State-of-the-Art}
+  \only<1>{
+    \begin{center}
+      \figcite{.9\textwidth}{material/exoplanets_1.png}{http://exoplanets.org/}      
+    \end{center}
+  }
+  \only<2>{
+    \begin{center}
+      \figcite{.9\textwidth}{material/exoplanets.png}{http://exoplanets.org/}      
+    \end{center}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{KEPLER Space Telescope}
+  \begin{columns}[T]
+    \column{0.5\textwidth}
+    \begin{itemize}
+    \item space observatory by \textit{NASA} to find planets
+    \item 2344 confirmed, over 2000 unconfirmed candidates
+    \end{itemize}
+    \column{0.5\textwidth}
+    \figcite{\textwidth}{material/kepler.jpg}{https://www.nasa.gov/mission_pages/kepler/}
+  \end{columns}
+\end{frame}
+
+\subsection{Future}
+\begin{frame}
+  \frametitle{GAIA Space Telescope}
+  \begin{columns}[T]
+    \column{0.5\textwidth}
+    \begin{itemize}
+    \item creates 3D Star Map since 2013
+    \item goal: find 10.000 - 50.000 Exoplanets (0 found yet)
+    \end{itemize}
+    \column{0.5\textwidth}
+    % \includegraphics[witdh=0.2\textwidth]{material/kepler.jpg}
+    \figcite{\textwidth}{material/gaia.jpg}{http://www.jwst.nasa.gov/images_artist13532.html}
+  \end{columns}
+\end{frame}
+\begin{frame}
+  \frametitle{JWST James Web Space Telescope}
+  \begin{columns}[T]
+    \column{0.5\textwidth}
+    \begin{itemize}
+    \item to-be successor of Hubble for infrared spectrum
+    \item delayed to 2021 (originally launch 2013)
+    \end{itemize}
+    \column{0.5\textwidth}
+    \figcite{\textwidth}{material/jwst.jpg}{http://www.jwst.nasa.gov/images_artist13532.html}
+  \end{columns}
+\end{frame}
+
+
+{  
+  \begin{frame}[plain]
+    \begin{center}
+      \includegraphics[height=0.9\paperheight]{material/progress.jpg}      
+    \end{center}
+  \end{frame}
+}
+
+\section{The Diversity of Exoplanets}
+\begin{frame}
+  \frametitle{Some Facts}
+  \begin{columns}
+    \column{.5\textwidth}
+      \begin{itemize}
+  \item exoplanets orbit all kinds of stars
+  \item mass range: 0.02 to 5780 Earth Masses
+  \item orbital period range: \SIrange{0.4}{3.2e5}{\day}
+  \item semi major axis: \SIrange{0.00585}{113}{AU}
+  \item furthest away: \SI{21190}{\lightyear}
+  \end{itemize}
+  \column{.5\textwidth}
+  \figcite{\textwidth}{material/mass_sep.png}{http://exoplanets.org/plots}
+  \end{columns}
+\end{frame}
+
+\subsection{Exoplanet Extremes}
+\begin{frame}
+  \frametitle{Hot Jupiters}
+  \begin{columns}
+    \column{0.5\textwidth}
+    \begin{itemize}
+    \item within a few Jupiter masses
+    \item close to star (\SIrange{0.015}{0.05}{AU}) $\implies$ hot
+    \item easy to detect by radial velocity method, astrometry
+    \end{itemize}
+    \column{0.5\textwidth}
+    \figcite{\textwidth}{material/hj.jpg}{http://hubblesite.org/newscenter/archive/releases/2008}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \begin{columns}
+    \frametitle{Planets in Habitable Zone}
+    \column{0.5\textwidth}
+    \begin{itemize}
+    \item<1-> habitable zone: allows liquid water, tollerable radiation levels
+    \item<2-> nearest: Proxima Centauri b $\SI{4.2}{\lightyear}$
+    \item<3-> extrapolations of KEPLER $\rightarrow$ more than 40 billion
+      in milkyway
+    \end{itemize}
+    \column{0.5\textwidth}
+    % \includegraphics[witdh=0.2\textwidth]{material/kepler.jpg}
+    \action<2->{\figcite{\textwidth}{material/prox_b.jpg}{https://www.eso.org/public/images/eso1629a/}}
+  \end{columns}
+\end{frame}
+
+{  
+  \begin{frame}[plain]
+    \begin{center}
+      \includegraphics[height=0.9\paperheight]{material/habit.jpg}      
+    \end{center}
+  \end{frame}
+}
+
+\begin{frame}
+  \frametitle{Systems with many Planets}
+  \begin{columns}
+    \column{0.5\textwidth}
+    \begin{itemize}
+    \item<1-> Trappist-1 has 7 planets, some in habtialble zone
+    \item<2-> hard to detect, but supposed to be prevalent
+    \item<3-> exoplanet.eu lists 637 multiple planet systems
+    \end{itemize}
+    \column{0.5\textwidth}
+    \figcite{\textwidth}{material/trap.jpg}{http://photojournal.jpl.nasa.gov/figures/PIA22093_fig1.jpg}
+  \end{columns}
+\end{frame}
+  
+{
+  \usebackgroundtemplate{
+    \includegraphics[width=\paperwidth]{material/trapbig.jpg}}
+  \begin{frame}[plain]
+    \bigskip
+    \hfill  \color{white} Thanks for your attention!
+
+    \btVFill
+   
+    \hfill\tiny\color{white}\url{https://www.spacetelescope.org/images/heic1713a/}\bigskip
+  \end{frame}
+}
+
+\section*{Resources}
+\begin{frame}
+  \frametitle{(Re)Sources}
+  \begin{itemize}
+  \item \scriptsize \url{http://exoplanets.org/} big, accurate database \normalsize
+  \item \scriptsize \url{http://exoplanet.eu/} another database \normalsize
+  \item \scriptsize \url{https://exoplanets.nasa.gov/} 3D visualizations! \normalsize
+  \item \tiny{``PROPOSAL FOR A PROJECT OF HIGH-PRECISION STELLAR RADIAL VELOCITY WORK''} by Otto Struve \normalsize
+  \item \tiny{``A QUANTITATIVE CRITERION FOR DEFINING PLANETS''}  by Jean-Luc Margot \normalsize
+  \item \tiny{``A COMBINED VERY LARGE TELESCOPE AND GEMINI STUDY OF THE ATMOSPHERE
+      OF THE DIRECTLY IMAGED PLANET, BETA PICTORIS b''} by Thayne Currie et al. \normalsize
+  \item \tiny{``TEMPERATE EARTH-SIZED PLANETS TRANSITING A NEARBY
+ULTRACOOL DWARF STAR''} by
+    Michaël Gillon  et al. \normalsize
+  \item \tiny{``NO LARGE POPULATION OF UNBOUND OR WIDE-ORBIT
+      JUPITER-MASS PLANETS''} by Przemek Mróz et al. (Rogue Planets, not included in the talk) \normalsize 
+
+  \end{itemize}
+\end{frame}
+\end{document}
